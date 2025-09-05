@@ -11,7 +11,7 @@
   - [x] RegisterForm.jsx（静的フォーム）
   - [ ] UserProfile.jsx（静的ページ）
   - [ ] Navigation.jsx（基本ナビゲーション）
-- [x] App.jsx更新（React Routerセットアップ）
+- [x] App.jsx更新（React Routerセットアップ・全ルート追加完了）
 - [ ] 静的ページの表示確認
 
 ### 2. 認証状態管理とロジック
@@ -89,9 +89,12 @@
 - [x] README.md 作成完了（Cookie-based JWT設計）
 - [x] .gitignore 設定完了
 - [x] ドキュメント修正完了（Cookie認証対応）
+- [x] フロントエンド基本UI作成完了（Home, Login, Register）
+- [x] React Router設定完了（/, /login, /register）
 
 ## 次のタスク
-- フロントエンド認証機能から開始（UI/UX重視アプローチ）
+- UserProfile.jsx と Navigation.jsx 作成
+- 静的ページ表示確認・動作テスト
 
 ## メモ
 - 学習目的のため段階的に実装
