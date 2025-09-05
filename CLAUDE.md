@@ -34,38 +34,44 @@ npm start        # 本番サーバー起動
 
 ## アーキテクチャと開発フロー
 
-### 段階的実装アプローチ（フロントエンド重視）
-8段階の開発計画に従う（`progress.md`で進捗管理）：
+### 段階的実装アプローチ（UI重視・段階的構築）
+9段階の開発計画に従う（`progress.md`で進捗管理）：
 
-1. **フロントエンド認証UI** - 認証Context、登録・ログインフォーム（モック使用）
-2. **フロントエンド状態管理・ルーティング** - React Router、Protected Routes、永続化
-3. **API通信層** - authService、モックAPI、Axios設定
-4. **バックエンド環境構築** - Express依存関係、npm scripts（完了済み）
-5. **Express サーバー・認証API** - サーバー設定、JWT認証エンドポイント
-6. **データベース統合** - PostgreSQL、DBconnect.js、usersテーブル
-7. **フロント・バック統合** - モック→実API切り替え、エラーハンドリング
-8. **OAuth実装** - GitHub/Google OAuth（Passport.js使用）
+1. **フロントエンド基本UI** - 静的ページコンポーネント、基本ルーティング
+2. **認証状態管理とロジック** - AuthContext、Protected Routes、認証ロジック
+3. **API通信層とモック** - authService、モックAPI、フォーム連携
+4. **バックエンド環境構築** - Express依存関係、cookie-parser、環境変数
+5. **バックエンド基盤構築** - サーバー設定、CORS・Cookie設定、基本確認
+6. **認証API実装** - JWT Cookie認証エンドポイント、モック認証
+7. **データベース統合** - PostgreSQL、DBconnect.js、実DB連携
+8. **フロント・バック統合** - 実API切り替え、認証フロー確認
+9. **OAuth実装** - GitHub/Google OAuth（Passport.js使用）
 
 ### 重要なアーキテクチャ決定
 - **バックエンド構造**: フラットディレクトリ構造（`src/`なし）、controllers・middleware・models・routesで分割
 - **データベース**: `DBconnect.js`経由の直接PostgreSQL接続（ORM未使用）
-- **認証戦略**: API認証にJWT使用、将来的にOAuth 2.0統合予定
-- **フロントエンド状態**: React Contextで認証状態管理
-- **API通信**: Axiosベースのサービス層
+- **認証戦略**: JWTをHttpOnly Cookieで送信、将来的にOAuth 2.0統合予定
+- **フロントエンド状態**: React Contextで認証状態管理（localStorageは不使用）
+- **API通信**: Axiosベースのサービス層（withCredentials対応）
 
 ### 重要ファイルとその役割
 - `progress.md` - 開発ロードマップと進捗管理
-- `frontend/src/context/AuthContext.jsx` - 認証状態管理
-- `frontend/src/services/authService.js` - API通信層
+- `frontend/src/pages/Home.jsx` - ランディングページ
+- `frontend/src/components/Auth/LoginForm.jsx` - ログインフォーム
+- `frontend/src/components/Auth/RegisterForm.jsx` - 登録フォーム  
+- `frontend/src/components/User/UserProfile.jsx` - ユーザープロフィール
+- `frontend/src/components/common/Navigation.jsx` - ナビゲーション
+- `frontend/src/context/AuthContext.jsx` - 認証状態管理（予定）
+- `frontend/src/services/authService.js` - API通信層（予定）
 - `backend/DBconnect.js` - データベース操作とパスワードハッシュ化（将来実装）
 
 ### サポートとガイダンス方針
 Claude Codeは実装指導役として以下を提供する：
-- **実装手順の詳細説明** - ステップバイステップガイド
-- **ベストプラクティス提案** - React/Express/認証のセキュリティパターン
-- **アーキテクチャ設計相談** - コンポーネント設計、状態管理、API設計
-- **トラブルシューティング** - エラー解決方法、デバッグ手法
-- **学習リソース紹介** - 関連ドキュメント、参考資料
+- **Cookie認証実装ガイド** - HttpOnly Cookie設定、CORS対応、セキュリティ考慮
+- **React認証パターン** - Context設計、Protected Routes、状態管理
+- **Express Cookie設定** - cookie-parser、認証ミドルウェア、JWT Cookie処理
+- **セキュリティベストプラクティス** - XSS/CSRF対策、SameSite設定
+- **トラブルシューティング** - Cookie送信問題、認証エラー解決
 
 ### 進捗管理
 開発進捗があった場合は、以下の手順で記録する：

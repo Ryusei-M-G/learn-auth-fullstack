@@ -9,20 +9,25 @@ learn-auth-fullstack/
 │   │   │   ├── Auth/    # 認証関連コンポーネント
 │   │   │   │   ├── LoginForm.jsx
 │   │   │   │   ├── RegisterForm.jsx
-│   │   │   │   ├── OAuthLogin.jsx
-│   │   │   │   └── LogoutButton.jsx
+│   │   │   │   ├── OAuthLogin.jsx （予定）
+│   │   │   │   └── LogoutButton.jsx （予定）
 │   │   │   ├── User/    # ユーザー関連コンポーネント
 │   │   │   │   ├── UserProfile.jsx
-│   │   │   │   └── AccountSettings.jsx
+│   │   │   │   └── AccountSettings.jsx （予定）
 │   │   │   └── common/  # 共通コンポーネント
-│   │   ├── hooks/       # カスタムフック
-│   │   ├── services/    # API通信
+│   │   │       └── Navigation.jsx
+│   │   ├── pages/       # ページコンポーネント
+│   │   │   └── Home.jsx
+│   │   ├── hooks/       # カスタムフック （予定）
+│   │   ├── services/    # API通信 （予定）
+│   │   │   ├── api.js
 │   │   │   ├── authService.js
-│   │   │   └── oauthService.js
-│   │   ├── context/     # React Context
+│   │   │   └── oauthService.js （予定）
+│   │   ├── context/     # React Context （予定）
 │   │   │   └── AuthContext.jsx
-│   │   └── utils/       # ユーティリティ関数
+│   │   └── utils/       # ユーティリティ関数 （予定）
 │   ├── public/
+│   ├── .env
 │   └── package.json
 ├── backend/            # バックエンドAPI
 │   ├── controllers/    # コントローラー
@@ -63,23 +68,24 @@ learn-auth-fullstack/
 ```
 
 ## 技術スタック
-- **Frontend**: React + Vite (JavaScript)
-- **Backend**: Express.js + Passport.js
+- **Frontend**: React + Vite (JavaScript) + React Router
+- **Backend**: Express.js + Passport.js + cookie-parser
 - **Database**: PostgreSQL
 - **Authentication**: 
-  - JWT (JSON Web Token)
+  - JWT (HttpOnly Cookie送信)
   - OAuth 2.0 (GitHub, Google)
 - **Password Hashing**: bcrypt
-- **HTTP Client**: Axios
-- **Security**: Express-rate-limit, CORS, Helmet
+- **HTTP Client**: Axios (withCredentials対応)
+- **Security**: Express-rate-limit, CORS, Helmet, SameSite Cookie
 
 ## 実装予定
 
 ### 基本認証システム
-- **JWT認証基盤**
+- **Cookie-based JWT認証**
   - ユーザー名/パスワードによる登録・ログイン
-  - JWTトークンの発行・検証
+  - JWTトークンをHttpOnly Cookieで送信
   - パスワードハッシュ化（bcrypt）
+  - CORS設定（credentials: true）
 
 ### OAuth 2.0統合（予定）
 - **SNS認証機能**
@@ -103,7 +109,8 @@ learn-auth-fullstack/
 - アカウント連携管理（予定）
 
 ### Backend
-- JWT認証とOAuth 2.0
+- Cookie-based JWT認証とOAuth 2.0
+- HttpOnly/SameSite Cookieでセキュア送信
 - パスワードハッシュ化（bcrypt）
 - PostgreSQL
 - Passport.jsでOAuth戦略管理
@@ -111,11 +118,12 @@ learn-auth-fullstack/
 ## APIエンドポイント
 
 ### 基本認証
-- `POST /api/auth/register` - ユーザー登録
-- `POST /api/auth/login` - ユーザーログイン
-- `POST /api/auth/logout` - ユーザーログアウト
-- `GET /api/user/profile` - ユーザー情報取得
-- `PUT /api/user/profile` - ユーザー情報更新
+- `POST /api/auth/register` - ユーザー登録（Cookieセット）
+- `POST /api/auth/login` - ユーザーログイン（Cookieセット）
+- `POST /api/auth/logout` - ユーザーログアウト（Cookieクリア）
+- `GET /api/user/profile` - ユーザー情報取得（Cookie認証）
+- `PUT /api/user/profile` - ユーザー情報更新（Cookie認証）
+- `GET /api/auth/me` - 認証状態確認（Cookie検証）
 
 ### OAuth認証（予定）
 - `GET /api/auth/github` - GitHub OAuth開始
@@ -155,8 +163,30 @@ npm run dev
 # マイグレーションの実行
 ```
 
-## 補足
+## 環境変数設定
 学習目的のため、`.env`ファイルはgitignoreに含めず、設定内容を確認できるようにしています。
+
+### 必要な環境変数
+```bash
+# JWT設定
+JWT_SECRET=your-jwt-secret-key
+JWT_EXPIRES_IN=7d
+
+# Cookie設定
+COOKIE_SECRET=your-cookie-secret
+NODE_ENV=development
+
+# データベース設定
+DATABASE_URL=postgresql://username:password@localhost:5432/learn_auth
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=learn_auth
+DB_USER=your-username
+DB_PASSWORD=your-password
+
+# CORS設定
+FRONTEND_URL=http://localhost:5173
+```
 
 ## 学習目標
 - JWT認証システムの実装
