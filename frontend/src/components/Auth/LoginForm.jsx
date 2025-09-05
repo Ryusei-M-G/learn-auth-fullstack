@@ -69,7 +69,7 @@ const LoginForm = () => {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            required
+            required//入力を必須化する 追加でバリデーションチェック入れたほうがいいかも
             style={{
               width: '100%',
               padding: '0.75rem',
