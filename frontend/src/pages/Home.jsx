@@ -2,7 +2,7 @@ const Home = () => {
   return (
     <div style={{ padding: '2rem', textAlign: 'center' }}>
       <h1>Learn Auth Fullstack</h1>
-      <p>JWTとOAuth2.0を使用した認証でもアプリケーション</p>
+      <p>JWTとOAuth2.0を使用した認証の学習用アプリケーション</p>
 
       <div style={{ marginTop: '2rem' }}>
         <h2>機能</h2>
@@ -25,7 +25,7 @@ const Home = () => {
         }}>
           ログイン
         </a>
-        <a href="/refister" style={{
+        <a href="/register" style={{
             margin: '0 1rem',
             padding: '0.5rem 1rem',
             backgroundColor: '#28a745',

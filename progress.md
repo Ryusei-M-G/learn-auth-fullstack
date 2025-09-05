@@ -6,12 +6,12 @@
 - [x] React Router導入（react-router-dom）
 - [x] Axios導入・Cookie対応設定
 - [ ] 基本ページコンポーネント作成（静的）
-  - [ ] Home.jsx（ランディングページ）
-  - [ ] LoginForm.jsx（静的フォーム）
+  - [x] Home.jsx（ランディングページ）
+  - [x] LoginForm.jsx（静的フォーム）
   - [ ] RegisterForm.jsx（静的フォーム）
   - [ ] UserProfile.jsx（静的ページ）
   - [ ] Navigation.jsx（基本ナビゲーション）
-- [ ] App.jsx更新（React Routerセットアップ）
+- [x] App.jsx更新（React Routerセットアップ）
 - [ ] 静的ページの表示確認
 
 ### 2. 認証状態管理とロジック
@@ -68,6 +68,14 @@
 - [ ] GitHub OAuth戦略作成
 - [ ] Google OAuth戦略作成
 - [ ] アカウント連携機能
+
+### 10. UI/UX改善（将来予定）
+- [ ] 2段階ログインフロー実装
+  - [ ] ランディングページ自動リダイレクト機能
+  - [ ] ID入力専用画面（LoginStep1.jsx）
+  - [ ] パスワード入力画面（LoginStep2.jsx）
+  - [ ] ログイン状態管理（step1 ID保持）
+  - [ ] 画面遷移ロジック実装
 
 ## 現在の状況
 - [x] プロジェクト初期化
