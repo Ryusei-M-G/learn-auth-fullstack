@@ -9,7 +9,7 @@
   - [x] Home.jsx（ランディングページ）
   - [x] LoginForm.jsx（静的フォーム）
   - [x] RegisterForm.jsx（静的フォーム）
-  - [ ] UserProfile.jsx（静的ページ）
+  - [x] UserProfile.jsx（静的ページ）
   - [ ] Navigation.jsx（基本ナビゲーション）
 - [x] App.jsx更新（React Routerセットアップ・全ルート追加完了）
 - [ ] 静的ページの表示確認
