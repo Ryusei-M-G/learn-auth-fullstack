@@ -5,14 +5,14 @@
 ### 1. フロントエンド基本UI（静的）
 - [x] React Router導入（react-router-dom）
 - [x] Axios導入・Cookie対応設定
-- [ ] 基本ページコンポーネント作成（静的）
+- [x] 基本ページコンポーネント作成（静的）
   - [x] Home.jsx（ランディングページ）
   - [x] LoginForm.jsx（静的フォーム）
   - [x] RegisterForm.jsx（静的フォーム）
-  - [ ] UserProfile.jsx（静的ページ）
-  - [ ] Navigation.jsx（基本ナビゲーション）
+  - [x] UserProfile.jsx（静的ページ）
+  - [x] Navigation.jsx（基本ナビゲーション）
 - [x] App.jsx更新（React Routerセットアップ・全ルート追加完了）
-- [ ] 静的ページの表示確認
+- [x] 静的ページの表示確認
 
 ### 2. 認証状態管理とロジック
 - [ ] 認証Context作成（AuthContext.jsx）
@@ -36,7 +36,6 @@
 - [ ] .env ファイル作成と環境変数設定
 
 ### 5. バックエンド基盤構築
-- [ ] .env ファイル作成と環境変数設定
 - [ ] 基本的なExpressサーバー設定（index.js）
 - [ ] CORS設定（credentials: true, origin設定）
 - [ ] cookie-parser ミドルウェア設定
@@ -85,16 +84,20 @@
 ## 現在の状況
 - [x] プロジェクト初期化
 - [x] frontend（React + Vite）作成完了
-- [x] backend 基本環境構築完了
+- [x] backend 基本依存関係インストール完了（Express等）
 - [x] README.md 作成完了（Cookie-based JWT設計）
 - [x] .gitignore 設定完了
 - [x] ドキュメント修正完了（Cookie認証対応）
-- [x] フロントエンド基本UI作成完了（Home, Login, Register）
-- [x] React Router設定完了（/, /login, /register）
+- [x] フロントエンド基本UI作成完了（Home, Login, Register, UserProfile, Navigation）
+- [x] React Router設定完了（/, /login, /register, /profile）
+- [x] 段階1「フロントエンド基本UI（静的）」完了
 
 ## 次のタスク
-- UserProfile.jsx と Navigation.jsx 作成
-- 静的ページ表示確認・動作テスト
+- 段階2：認証状態管理とロジック
+  - 認証Context作成（AuthContext.jsx）
+  - 認証状態の管理（Cookie-based、自動チェック）
+  - ログアウト機能実装
+  - Protected Routes実装
 
 ## メモ
 - 学習目的のため段階的に実装
