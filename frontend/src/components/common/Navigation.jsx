@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 const Navigation = () => {
+  const { user, isAuthenticated, logout } = useAuth();
+  
+  const handleLogout = async () => {
+    await logout();
+  };
+
   return (
     <nav style={{
       padding: '1rem 2rem',
@@ -49,41 +56,70 @@ const Navigation = () => {
             ホーム
           </Link>
           
-          <Link 
-            to="/login"
-            style={{
-              color: '#007bff',
-              textDecoration: 'none',
-              padding: '0.5rem',
-              borderRadius: '4px'
-            }}
-          >
-            ログイン
-          </Link>
-          
-          <Link 
-            to="/register"
-            style={{
-              color: '#007bff',
-              textDecoration: 'none',
-              padding: '0.5rem',
-              borderRadius: '4px'
-            }}
-          >
-            新規登録
-          </Link>
-          
-          <Link 
-            to="/profile"
-            style={{
-              color: '#007bff',
-              textDecoration: 'none',
-              padding: '0.5rem',
-              borderRadius: '4px'
-            }}
-          >
-            プロフィール
-          </Link>
+          {!isAuthenticated ? (
+            <>
+              <Link 
+                to="/login"
+                style={{
+                  color: '#007bff',
+                  textDecoration: 'none',
+                  padding: '0.5rem',
+                  borderRadius: '4px'
+                }}
+              >
+                ログイン
+              </Link>
+              
+              <Link 
+                to="/register"
+                style={{
+                  color: '#007bff',
+                  textDecoration: 'none',
+                  padding: '0.5rem',
+                  borderRadius: '4px'
+                }}
+              >
+                新規登録
+              </Link>
+            </>
+          ) : (
+            <>
+              <span style={{
+                color: '#333',
+                padding: '0.5rem',
+                fontSize: '0.9rem'
+              }}>
+                こんにちは、{user?.username}さん
+              </span>
+              
+              <Link 
+                to="/profile"
+                style={{
+                  color: '#007bff',
+                  textDecoration: 'none',
+                  padding: '0.5rem',
+                  borderRadius: '4px'
+                }}
+              >
+                プロフィール
+              </Link>
+              
+              <button
+                onClick={handleLogout}
+                style={{
+                  backgroundColor: '#dc3545',
+                  color: 'white',
+                  border: 'none',
+                  padding: '0.5rem 1rem',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem'
+                }}
+              >
+                ログアウト
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>

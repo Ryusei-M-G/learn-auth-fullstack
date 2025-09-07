@@ -16,7 +16,7 @@
 
 ### 2. 認証状態管理とロジック
 - [x] 認証Context作成（AuthContext.jsx）
-- [ ] 認証状態の管理（Cookie-based、自動チェック）
+- [x] 認証状態の管理（Cookie-based、自動チェック）
 - [ ] ログアウト機能実装
 - [ ] Protected Routes実装
 

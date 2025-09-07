@@ -1,20 +1,28 @@
 import { useState } from "react";
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const UserProfile = () => {
-  //仮配置
-  const [userInfo] = useState({
-    username: "sample user",
-    email: "sample@example.com",
-    joinDate: "2025-01-01",
-    lastLogin: "2024-12-06T10:30:00",
-  });
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogout = () => {
-    //ログアウト機能は後で実装予定
-    console.log("ログアウト");
+  // 認証されていない場合はログインページにリダイレクト
+  if (!isAuthenticated || !user) {
+    navigate('/login');
+    return null;
+  }
+
+  const handleLogout = async () => {
+    const result = await logout();
+    if (result.success) {
+      console.log('ログアウト成功');
+      navigate('/');
+    }
   };
+  
   const handleEditProfile = () => {
     console.log("プロフィール編集");
+    alert('プロフィール編集機能は後で実装予定');
   };
 
   return (
@@ -60,7 +68,7 @@ const UserProfile = () => {
               fontSize: "1rem",
             }}
           >
-            {userInfo.username}
+            {user.username}
           </div>
         </div>
 
@@ -84,7 +92,7 @@ const UserProfile = () => {
               fontSize: "1rem",
             }}
           >
-            {userInfo.email}
+            {user.email}
           </div>
         </div>
 
@@ -108,7 +116,7 @@ const UserProfile = () => {
               fontSize: "1rem",
             }}
           >
-            {userInfo.joinDate}
+            {user.joinDate}
           </div>
         </div>
 
@@ -132,7 +140,7 @@ const UserProfile = () => {
               fontSize: "1rem",
             }}
           >
-            {new Date(userInfo.lastLogin).toLocaleString("ja-JP")}
+            {new Date(user.lastLogin).toLocaleString("ja-JP")}
           </div>
         </div>
       </div>

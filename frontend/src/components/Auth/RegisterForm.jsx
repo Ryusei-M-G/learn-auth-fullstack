@@ -1,11 +1,17 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
     username: '',
+    email: '',
     password: '',
     confirmPassword: ''
   });
+  
+  const navigate = useNavigate();
+  const { register, loading } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,18 +21,27 @@ const RegisterForm = () => {
     }))
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();//ローディング停止
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
     if (formData.password !== formData.confirmPassword) {
       alert('パスワードが一致しません');
       return;
     }
 
-    console.log('ユーザー登録試行:', {
+    const result = await register({
       username: formData.username,
-      password: formData.password,
+      email: formData.email,
+      password: formData.password
     });
-    alert(formData.username);
+    
+    if (result.success) {
+      console.log('登録成功:', result.user);
+      navigate('/profile'); // プロフィールページに遷移
+    } else {
+      console.error('登録失敗:', result.error);
+      alert(`登録に失敗しました: ${result.error}`);
+    }
   };
 
   return (
@@ -51,6 +66,30 @@ const RegisterForm = () => {
             id="username"
             name="username"
             value={formData.username}
+            onChange={handleChange}
+            required
+            style={{
+              width: '100%',
+              padding: '0.75rem',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+              fontSize: '1rem',
+              boxSizing: 'border-box'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '1rem' }}>
+          <label htmlFor="email" style={{
+            display: 'block', marginBottom: '0.5rem'
+          }}>
+            メールアドレス
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
             onChange={handleChange}
             required
             style={{
@@ -114,18 +153,19 @@ const RegisterForm = () => {
         </div>
         <button
           type="submit"
+          disabled={loading}
           style={{
             width: '100%',
             padding: '0.75rem',
-            backgroundColor: '#28a745',
+            backgroundColor: loading ? '#6c757d' : '#28a745',
             color: 'white',
             border: 'none',
             borderRadius: '4px',
             fontSize: '1rem',
-            cursor: 'pointer'
+            cursor: loading ? 'not-allowed' : 'pointer'
           }}
         >
-          登録
+          {loading ? '登録中...' : '登録'}
         </button>
       </form>
 

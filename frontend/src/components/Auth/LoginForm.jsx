@@ -1,10 +1,15 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   });
+  
+  const navigate = useNavigate();
+  const { login, loading } = useAuth();
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -14,12 +19,18 @@ const LoginForm = () => {
     }));
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();//リロードされないように
-    //とりあえずconsole.log
-    console.log('ログイン試行:', formData);
-    alert(`ログイン試行\nユーザー名: ${formData.username}\nパスワード: ${formData.password}`);
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const result = await login(formData);
+    
+    if (result.success) {
+      console.log('ログイン成功:', result.user);
+      navigate('/profile'); // プロフィールページに遷移
+    } else {
+      console.error('ログイン失敗:', result.error);
+      alert(`ログインに失敗しました: ${result.error}`);
+    }
   }
 
   return (
@@ -83,18 +94,19 @@ const LoginForm = () => {
 
         <button
           type="submit"
+          disabled={loading}
           style={{
             width: '100%',
             padding: '0.75rem',
-            backgroundColor: '#007bff',
+            backgroundColor: loading ? '#6c757d' : '#007bff',
             color: 'white',
             border: 'none',
             borderRadius: '4px',
             fontSize: '1rem',
-            cursor: 'pointer'
+            cursor: loading ? 'not-allowed' : 'pointer'
           }}
         >
-          ログイン
+          {loading ? 'ログイン中...' : 'ログイン'}
         </button>
       </form>
       <div style={{ textAlign: 'center', marginTop: '1rem' }}>
