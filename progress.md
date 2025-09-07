@@ -15,7 +15,7 @@
 - [x] 静的ページの表示確認
 
 ### 2. 認証状態管理とロジック
-- [ ] 認証Context作成（AuthContext.jsx）
+- [x] 認証Context作成（AuthContext.jsx）
 - [ ] 認証状態の管理（Cookie-based、自動チェック）
 - [ ] ログアウト機能実装
 - [ ] Protected Routes実装
