@@ -32,15 +32,15 @@
 - [x] package.json 初期化
 - [x] 基本依存関係インストール（express, bcrypt, jsonwebtoken, pg, cors, express-rate-limit, helmet）
 - [x] 開発用依存関係（nodemon）
-- [ ] cookie-parser 追加インストール
-- [ ] .env ファイル作成と環境変数設定
+- [x] cookie-parser 追加インストール
+- [x] .env ファイル作成と環境変数設定
 
 ### 5. バックエンド基盤構築
-- [ ] 基本的なExpressサーバー設定（index.js）
-- [ ] CORS設定（credentials: true, origin設定）
-- [ ] cookie-parser ミドルウェア設定
-- [ ] セキュリティ設定（helmet, rate-limit）
-- [ ] サーバー起動確認（Hello World）
+- [x] 基本的なExpressサーバー設定（index.js）
+- [x] CORS設定（credentials: true, origin設定）
+- [x] cookie-parser ミドルウェア設定
+- [x] セキュリティ設定（helmet, rate-limit）
+- [x] サーバー起動確認（Hello World）
 
 ### 6. 認証API実装
 - [ ] 認証エンドポイント作成（Cookie送信対応）
@@ -91,13 +91,15 @@
 - [x] フロントエンド基本UI作成完了（Home, Login, Register, UserProfile, Navigation）
 - [x] React Router設定完了（/, /login, /register, /profile）
 - [x] 段階1「フロントエンド基本UI（静的）」完了
+- [x] 段階4「バックエンド環境構築」完了
+- [x] 段階5「バックエンド基盤構築」完了
 
 ## 次のタスク
-- 段階2：認証状態管理とロジック
-  - 認証Context作成（AuthContext.jsx）
-  - 認証状態の管理（Cookie-based、自動チェック）
-  - ログアウト機能実装
-  - Protected Routes実装
+- 段階6：認証API実装
+  - 認証エンドポイント作成（Cookie送信対応）
+  - JWT Cookie生成・検証機能（HttpOnly/SameSite）
+  - モック認証機能（ユーザー固定データ）
+  - フロントエンドとの連携テスト
 
 ## メモ
 - 学習目的のため段階的に実装
